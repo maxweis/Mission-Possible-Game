@@ -42,19 +42,14 @@ void PlayerMove(DIRECTION dir)
         PlayerAnimate();
 }
 
-/*void PlayerMouseRotate()*/
-/*{*/
-        /*if (MouseMove()){*/
-                /*int x, y;*/
-                /*SDL_GetMouseState(&x, &y);*/
-                /*printf("%d, %d", x, y);*/
-                /*printf("hello");*/
-                /*int x_delta = player->sprite->rect->x + player->sprite->rect->w / 2;*/
-                /*int y_delta = player->sprite->rect->y + player->sprite->rect->h / 2;*/
-                /*player->sprite->angle = (atan2(y_delta, x_delta) * 180.0) / 3.1416;*/
-                /*//fix mouse rotation math*/
-        /*}*/
-/*}*/
+void PlayerMouseRotate()
+{
+        int x, y;
+        SDL_GetMouseState(&x, &y);
+        int x_delta = player->sprite->rect->x + player->sprite->rect->w / 2 - x;
+        int y_delta = player->sprite->rect->y + player->sprite->rect->h / 2 - y;
+        player->sprite->angle = 265 + ((atan2(y_delta, x_delta) * 180.0) / 3.1416);
+}
 
 void PlayerAnimate()
 {
@@ -66,4 +61,9 @@ void PlayerAnimate()
                         player->sprite->frame = 0;
                 }
         }
+}
+
+void UpdatePlayer()
+{
+        PlayerMouseRotate();
 }

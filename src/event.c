@@ -33,6 +33,4 @@ void CheckPlayerEvent()
 
         if (keystate[SDL_SCANCODE_A])
                 player->move(LEFT);
-
-        /*player->update();*/
 }

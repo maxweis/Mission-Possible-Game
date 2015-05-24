@@ -14,8 +14,8 @@ void InitSDL(char *caption)
                         SDL_WINDOW_OPENGL);
 
         render = SDL_CreateRenderer(window, -1,
-                        SDL_RENDERER_PRESENTVSYNC |
                         SDL_RENDERER_ACCELERATED);
 
         SDL_SetRelativeMouseMode(true);
+        SDL_RenderSetLogicalSize(render, SWIDTH, SHEIGHT);
 }
