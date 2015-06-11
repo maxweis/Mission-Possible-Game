@@ -1,25 +1,28 @@
 #include "main.h"
 
+//ISSUES
+//fix rotated collision
+
 int main(int argc, char *argv[])
 {
-        InitTimer();
-
         InitSDL("Platformer");
 
         player = CreatePlayer();
 
+        object = CreateObject(true);
+
+        AddObject(*object);
+
         while (!done){
-                CheckWindowEvent();
+                LimitFrames();
 
-                CheckPlayerEvent(player);
+                CheckUserEvents();
 
-                UpdatePlayer();
+                PlayerUpdate();
 
-                UpdateObjects();
+                UpdateObject();
 
                 RenderScreen();
-
-                UpdateFrames();
         }
 
         /*QuitSDL();*/

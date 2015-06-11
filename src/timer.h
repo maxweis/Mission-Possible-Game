@@ -2,6 +2,4 @@
 
 long buffer;
 
-void InitTimer();
-
-void UpdateFrames();
+void LimitFrames();

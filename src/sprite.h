@@ -4,4 +4,4 @@
 
 extern SDL_Renderer *render;
 
-Sprite *SpriteInit(int width, int height, const char *ImagePath);
+Sprite *SpriteInit(int width, int height, int scale, const char *ImagePath);

@@ -2,6 +2,7 @@
 #define ENUMS_H
 
 typedef enum{
+        NONE,
         UP,
         RIGHT,
         DOWN,

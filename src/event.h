@@ -8,6 +8,8 @@ extern Player *player;
 
 bool MouseMove();
 
-void CheckWindowEvent();
+void CheckUserEvents();
+void InitMouse();
 
-void CheckPlayerEvent();
+int mouse_x, mouse_y;
+int temp_mouse_x, temp_mouse_y;

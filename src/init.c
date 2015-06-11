@@ -1,8 +1,5 @@
 #include "init.h"
 
-SDL_Window *window;
-SDL_Renderer *render;
-
 void InitSDL(char *caption)
 {
         if (SDL_Init(SDL_INIT_EVERYTHING))
@@ -18,4 +15,7 @@ void InitSDL(char *caption)
 
         SDL_SetRelativeMouseMode(true);
         SDL_RenderSetLogicalSize(render, SWIDTH, SHEIGHT);
+
+        InitObject();
+        InitMouse();
 }

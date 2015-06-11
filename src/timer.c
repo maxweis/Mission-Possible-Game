@@ -1,29 +1,19 @@
 #include "timer.h"
 
-unsigned int frames;
+static Uint32 next_time;
 
-void ResetFrames()
+Uint32 TimeLeft()
 {
-        frames = SDL_GetTicks() + 16;
+        Uint32 now = SDL_GetTicks();
+        if (next_time <= now)
+                return 0;
+        else
+                return next_time - now;
 }
 
-void UpdateFrames()
+void LimitFrames()
 {
         buffer++;
-        unsigned int ticks = SDL_GetTicks();
-
-        if (frames < ticks)
-                return;
-        else if (frames > ticks + 16)
-                SDL_Delay(16);
-        else
-                SDL_Delay(frames - ticks);
-
-        ResetFrames();
-}
-
-void InitTimer()
-{
-        buffer = 0;
-        ResetFrames();
+        SDL_Delay(TimeLeft());
+        next_time += 16;
 }
