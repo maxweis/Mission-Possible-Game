@@ -38,17 +38,17 @@ void RenderObject()
 {
         if (render_object_number != 0){
                 for (int i = 0; i < render_object_number; i++){
-                SDL_Rect sprite = {render_objects[i].sprite->rect->x,
-                        render_objects[i].sprite->rect->y,
-                        render_objects[i].sprite->rect->w,
-                        render_objects[i].sprite->rect->h};
+                        SDL_Rect sprite = {render_objects[i].sprite->rect->x,
+                                render_objects[i].sprite->rect->y,
+                                render_objects[i].sprite->rect->w,
+                                render_objects[i].sprite->rect->h};
 
-                SDL_Rect slide = {render_objects[i].sprite->rect->w / render_objects[i].sprite->scale * render_objects[i].sprite->frame,
-                        0,
-                        render_objects[i].sprite->rect->w / render_objects[i].sprite->scale,
-                        render_objects[i].sprite->rect->h / render_objects[i].sprite->scale};
+                        SDL_Rect slide = {render_objects[i].sprite->rect->w / render_objects[i].sprite->scale * render_objects[i].sprite->frame,
+                                0,
+                                render_objects[i].sprite->rect->w / render_objects[i].sprite->scale,
+                                render_objects[i].sprite->rect->h / render_objects[i].sprite->scale};
 
-                SDL_RenderCopy(render, render_objects[i].sprite->image, &slide, &sprite);
+                        SDL_RenderCopy(render, render_objects[i].sprite->image, &slide, &sprite);
                 }
         }
 }
@@ -65,6 +65,7 @@ void RenderBackground()
 
         if (background == NULL)
                 InitRenderBackground();
+
         SDL_RenderCopy(render, background, NULL, &size);
 }
 
