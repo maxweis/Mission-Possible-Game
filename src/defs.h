@@ -8,3 +8,5 @@
 
 #define SWIDTH 1366
 #define SHEIGHT 768
+#define IDK 0
+#define OBJECT_LIMIT 1000

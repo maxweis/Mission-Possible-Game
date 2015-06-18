@@ -6,36 +6,38 @@ void UpdateObject()
 
 bool ObjectCollision(SDL_Rect *rect)
 {
-        for (int i = 0; i < object_number; i++)
-                if (Collision(objects[i].sprite->rect, rect) != NONE)
+        for (int i = 0; i < collision_object_number; i++)
+                if (Collision(collision_objects[i].sprite->rect, rect) != NONE)
                         return true;
         return false;
 }
 
 void InitObject()
 {
-        object_number = 0;
+        collision_object_number = 0;
+        render_object_number = 0;
 }
 
 void AddObject(Object object)
 {
         if (object.solid){
-                objects[object_number] = object;
-                object_number++;
+                collision_objects[collision_object_number++] = object;
         }
+        render_objects[render_object_number++] = object;
+
 }
 
-Object *CreateObject(bool solid)
+Object *CreateObject(bool solid, int x, int y, int width, int height, int scale, char *sprite)
 {
         Object *temp = malloc(sizeof(Object));
-        temp->sprite = SpriteInit(64, 64, 2, "art/sprites/object/glass.png");
+        temp->sprite = SpriteInit(width, height, scale, sprite);
 
         temp->sprite->angle = 0;
 
         temp->sprite->frame = 0;
 
-        temp->sprite->rect->x = 0;
-        temp->sprite->rect->y = 0;
+        temp->sprite->rect->x = x;
+        temp->sprite->rect->y = y;
 
         temp->vel.x = 0;
         temp->vel.y = 0;

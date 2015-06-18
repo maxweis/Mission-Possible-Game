@@ -16,8 +16,8 @@ Player *CreatePlayer()
 
         temp->move = &PlayerMove;
 
-        temp->sprite->rect->x = 190;
-        temp->sprite->rect->y = 190;
+        temp->sprite->rect->x = 50;
+        temp->sprite->rect->y = 50;
 
         temp->sprite->w = temp->sprite->rect->w;
         temp->sprite->h = temp->sprite->rect->h;

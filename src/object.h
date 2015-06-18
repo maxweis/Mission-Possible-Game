@@ -3,13 +3,13 @@
 #include "sprite.h"
 #include "collision.h"
 
-#define OBJECT_LIMIT 1000
-
 extern Object *object;
-Object objects[OBJECT_LIMIT];
-int object_number;
+Object collision_objects[OBJECT_LIMIT];
+Object render_objects[OBJECT_LIMIT];
+int render_object_number;
+int collision_object_number;
 
-Object *CreateObject(bool solid);
+Object *CreateObject(bool solid, int x, int y, int width, int height, int scale, char *sprite);
 
 void UpdateObject();
 void AddObject(Object object);

@@ -18,8 +18,15 @@ Sprite *SpriteInit(int width, int height, int scale, const char *ImagePath)
 
         temp->rect = calloc(1, sizeof(SDL_Rect));
 
+        if (height == 0 || width == 0){
+                SDL_QueryTexture(temp->image, NULL, NULL, &temp->rect->w, &temp->rect->h);
+                temp->rect->w *= temp->scale;
+                temp->rect->h *= temp->scale;
+        }
+        else{
         temp->rect->w = width * temp->scale;
         temp->rect->h = height * temp->scale;
+        }
 
         temp->destroy = &SpriteDestroy;
 

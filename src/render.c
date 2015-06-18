@@ -36,17 +36,21 @@ void RenderPlayer()
 
 void RenderObject()
 {
-        SDL_Rect sprite = {object->sprite->rect->x,
-                object->sprite->rect->y,
-                object->sprite->rect->w,
-                object->sprite->rect->h};
+        if (render_object_number != 0){
+                for (int i = 0; i < render_object_number; i++){
+                SDL_Rect sprite = {render_objects[i].sprite->rect->x,
+                        render_objects[i].sprite->rect->y,
+                        render_objects[i].sprite->rect->w,
+                        render_objects[i].sprite->rect->h};
 
-        SDL_Rect slide = {object->sprite->rect->w / object->sprite->scale * object->sprite->frame,
-                0,
-                object->sprite->rect->w / object->sprite->scale,
-                object->sprite->rect->h / object->sprite->scale};
+                SDL_Rect slide = {render_objects[i].sprite->rect->w / render_objects[i].sprite->scale * render_objects[i].sprite->frame,
+                        0,
+                        render_objects[i].sprite->rect->w / render_objects[i].sprite->scale,
+                        render_objects[i].sprite->rect->h / render_objects[i].sprite->scale};
 
-        SDL_RenderCopy(render, object->sprite->image, &slide, &sprite);
+                SDL_RenderCopy(render, render_objects[i].sprite->image, &slide, &sprite);
+                }
+        }
 }
 
 SDL_Texture *background = NULL;
