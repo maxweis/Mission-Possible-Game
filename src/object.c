@@ -1,9 +1,5 @@
 #include "object.h"
 
-void UpdateObject()
-{
-}
-
 bool ObjectCollision(SDL_Rect *rect)
 {
         for (int i = 0; i < collision_object_number; i++)
@@ -12,10 +8,19 @@ bool ObjectCollision(SDL_Rect *rect)
         return false;
 }
 
+int CountList(char **list)
+{
+        int i;
+        for (i = 0; list[i] != NULL; i++)
+                ;
+        return i;
+}
+
 void InitObject()
 {
         collision_object_number = 0;
         render_object_number = 0;
+        object_amount = CountList(object_list);
 }
 
 void AddObject(Object object)
@@ -24,18 +29,17 @@ void AddObject(Object object)
                 collision_objects[collision_object_number++] = object;
         }
         render_objects[render_object_number++] = object;
-
 }
 
-Object *CreateObject(bool solid, int x, int y, int width, int height, int scale, char *sprite)
+Object *CreateObject(bool solid, int x, int y, int width, int height, int scale, int id, int angle)
 {
         Object *temp = malloc(sizeof(Object));
-        temp->sprite = SpriteInit(width, height, scale, sprite);
+        temp->sprite = SpriteInit(width, height, scale, object_list[id]);
 
-        temp->sprite->angle = 0;
-
+        temp->sprite->angle = angle;
         temp->sprite->frame = 0;
 
+        temp->id = id;
         temp->sprite->rect->x = x;
         temp->sprite->rect->y = y;
 

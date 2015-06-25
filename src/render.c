@@ -1,7 +1,5 @@
 #include "render.h"
 
-#include <SDL2/SDL_image.h>
-
 SDL_Texture *cursor = NULL;
 void InitRenderCursor()
 {
@@ -53,18 +51,41 @@ void RenderObject()
         }
 }
 
-SDL_Texture *background = NULL;
-void InitRenderBackground()
+TTF_Font *mono_font = NULL;
+void InitRenderText(char *font)
 {
-        background = IMG_LoadTexture(render, "art/backgrounds/brick.jpg");
+        if (TTF_Init())
+                fprintf(stderr, "TTF_Init() failed (install sdl2_ttf) : %s\n", TTF_GetError());
+        mono_font = TTF_OpenFont(font, 12);
+        if (mono_font == NULL)
+                fprintf(stderr, "Missing font: %s\n", TTF_GetError());
 }
 
-void RenderBackground()
+void RenderText(char *text, SDL_Rect box, char *font)
+{
+        if (mono_font == NULL)
+                InitRenderText(font);
+
+        SDL_Color white = {255, 255, 255};
+        SDL_Surface *text_surface = TTF_RenderText_Solid(mono_font, text, white);
+
+        SDL_Texture *present = SDL_CreateTextureFromSurface(render, text_surface);
+
+        SDL_RenderCopy(render, present, NULL, &box);
+}
+
+SDL_Texture *background = NULL;
+void InitRenderBackground(char *background_path)
+{
+        background = IMG_LoadTexture(render, background_path); 
+}
+
+void RenderBackground(char *background_path)
 {
         SDL_Rect size = {0, 0, SWIDTH, SHEIGHT};
 
         if (background == NULL)
-                InitRenderBackground();
+                InitRenderBackground(background_path);
 
         SDL_RenderCopy(render, background, NULL, &size);
 }
@@ -73,7 +94,7 @@ void RenderScreen()
 {
         SDL_RenderClear(render);
 
-        RenderBackground();
+        RenderBackground(background_list[level_background]);
         RenderPlayer();
         RenderObject();
         RenderCursor();

@@ -40,5 +40,7 @@ typedef struct Object{
         bool solid;
 
         Vector vel;
+
+        int id;
 } Object;
 #endif

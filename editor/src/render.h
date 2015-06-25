@@ -7,7 +7,7 @@
 
 extern SDL_Renderer *render;
 extern char *object_list[];
-//extern int mouse_x;
-//extern int mouse_y;
+extern char *background_list[];
+extern int level_background;
 
 void RenderScreen();

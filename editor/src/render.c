@@ -11,8 +11,8 @@ void RenderCursor()
 {
         if (cursor == NULL)
                 InitRenderCursor();
-        SDL_Rect mouse = {mouse_x - 15, mouse_y - 15, 31, 31};
-        cursor_object = CreateObject(input_solid, mouse_x, mouse_y, IDK, IDK, input_scale, object_list[object_selection]);
+        SDL_Rect mouse = {mouse_pos.x - 15, mouse_pos.y - 15, 31, 31};
+        cursor_object = CreateObject(input_solid, mouse_pos.x, mouse_pos.y, IDK, IDK, input_scale, object_selection, input_angle);
         SDL_Rect sprite = {
                 cursor_object->sprite->rect->x,
                 cursor_object->sprite->rect->y,
@@ -20,13 +20,13 @@ void RenderCursor()
                 cursor_object->sprite->rect->h
         };
 
-        SDL_RenderCopy(render, cursor_object->sprite->image, NULL, &sprite);
+        SDL_RenderCopyEx(render, cursor_object->sprite->image, NULL, &sprite, input_angle, NULL, SDL_FLIP_NONE);
         SDL_RenderCopy(render, cursor, NULL, &mouse); 
 }
 
 void RenderObject()
 {
-        if (render_object_number != 0){
+        if (render_object_number > 0){
                 for (int i = 0; i < render_object_number; i++){
                         SDL_Rect sprite = {
                                 render_objects[i].sprite->rect->x,
@@ -42,7 +42,7 @@ void RenderObject()
                                 render_objects[i].sprite->rect->h / render_objects[i].sprite->scale
                         };
 
-                        SDL_RenderCopy(render, render_objects[i].sprite->image, &slide, &sprite);
+                        SDL_RenderCopyEx(render, render_objects[i].sprite->image, &slide, &sprite, render_objects[i].sprite->angle, NULL, SDL_FLIP_NONE);
                 }
         }
 }
@@ -51,10 +51,10 @@ TTF_Font *mono_font = NULL;
 void InitRenderText(char *font)
 {
         if (TTF_Init())
-                fprintf(stderr, "TTF_Init() failed (install sdl2_ttf) : %s", TTF_GetError());
+                fprintf(stderr, "TTF_Init() failed (install sdl2_ttf) : %s\n", TTF_GetError());
         mono_font = TTF_OpenFont(font, 12);
         if (mono_font == NULL)
-                fprintf(stderr, "Missing font: %s", TTF_GetError());
+                fprintf(stderr, "Missing font: %s\n", TTF_GetError());
 }
 
 void RenderText(char *text, SDL_Rect box, char *font)
@@ -74,7 +74,7 @@ void RenderCoords()
 {
         char coords[64];
 
-        sprintf(coords, "%d; %d, %d; %d", input_solid, mouse_x, mouse_y, input_scale);
+        sprintf(coords, "%d; %d, %d; %d; %d", input_solid, mouse_pos.x, mouse_pos.y, input_scale, input_angle);
 
         SDL_Rect box = {
                 1266, 700,
@@ -84,17 +84,19 @@ void RenderCoords()
 }
 
 SDL_Texture *background = NULL;
-void InitRenderBackground()
+void InitRenderBackground(char *background_path)
 {
-        background = IMG_LoadTexture(render, "../art/backgrounds/brick.jpg");
+        background = IMG_LoadTexture(render, background_path);
+        if (background == NULL)
+                fprintf(stderr, "Image not loaded : %s\n", SDL_GetError());
 }
 
-void RenderBackground()
+void RenderBackground(char *background_path)
 {
         SDL_Rect size = {0, 0, SWIDTH, SHEIGHT};
 
         if (background == NULL)
-                InitRenderBackground();
+                InitRenderBackground(background_path);
 
         SDL_RenderCopy(render, background, NULL, &size);
 }
@@ -103,7 +105,7 @@ void RenderScreen()
 {
         SDL_RenderClear(render);
 
-        RenderBackground();
+        RenderBackground(background_list[level_background]);
         RenderObject();
         RenderCursor();
         RenderCoords();

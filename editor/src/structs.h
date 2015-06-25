@@ -4,18 +4,18 @@
 #define STRUCTS_H
 
 typedef struct Vector{
-        float x;
-        float y;
+        int x;
+        int y;
 } Vector;
 
 typedef struct Sprite{
-        int frame;
+        double frame;
         double angle;
         double temp_angle;
         int scale;
         SDL_Texture *image;
         SDL_Rect *rect;
-        int w, h;
+        double w, h;
 
         void (*destroy)(void *self);
 } Sprite;
@@ -38,6 +38,8 @@ typedef struct Object{
         Sprite *sprite;
 
         bool solid;
+
+        int id;
 
         Vector vel;
 } Object;

@@ -15,10 +15,12 @@ bool MouseMove();
 void CheckUserEvents();
 void InitMouse();
 void InitEvent();
+void GetEvents();
 
-int mouse_x, mouse_y;
-int temp_mouse_x, temp_mouse_y;
+Vector mouse_pos;
+Vector mouse_temp_pos;
 int input_scale;
+int input_angle;
 bool input_solid;
 bool mouse_click;
 bool mouse_hold;

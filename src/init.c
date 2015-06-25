@@ -17,5 +17,6 @@ void InitSDL(char *caption)
         SDL_RenderSetLogicalSize(render, SWIDTH, SHEIGHT);
 
         InitObject();
+        InitEvent();
         InitMouse();
 }
