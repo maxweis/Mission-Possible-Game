@@ -8,6 +8,7 @@
 #include "render.h"
 #include "timer.h"
 
+extern long buffer;
+
 Player *player;
 bool done;
-extern long buffer;

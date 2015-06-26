@@ -7,14 +7,14 @@ void SpriteDestroy(void *self)
         free(this->rect);
 }
 
-Sprite *SpriteInit(int width, int height, int scale, const char *ImagePath)
+Sprite *SpriteInit(int width, int height, int scale, const char *image_path)
 {
         Sprite *temp = malloc(sizeof(Sprite));
-        temp->image = IMG_LoadTexture(render, ImagePath);
+        temp->image = IMG_LoadTexture(render, image_path);
 
         temp->scale = scale;
         if (temp->image == NULL)
-                fprintf(stderr, "Can not load image at %s\n", ImagePath);
+                fprintf(stderr, "Can not load image at %s\n", image_path);
 
         temp->rect = calloc(1, sizeof(SDL_Rect));
 

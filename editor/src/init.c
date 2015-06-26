@@ -13,12 +13,11 @@ void InitSDL(char *caption)
         render = SDL_CreateRenderer(window, -1,
                         SDL_RENDERER_ACCELERATED);
 
-        SDL_SetRelativeMouseMode(true);
+        SDL_ShowCursor(false);
         SDL_RenderSetLogicalSize(render, SWIDTH, SHEIGHT);
 
         if (IMG_Init(0))
                 fprintf(stderr, "Unable to initialize SDL_image: %s\n", SDL_GetError());
         InitObject();
-        InitMouse();
         InitEvent();
 }

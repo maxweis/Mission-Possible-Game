@@ -68,8 +68,8 @@ void PlayerMove(DIRECTION dir)
 void PlayerMouseRotate()
 {
         if (MouseMove()){
-                int x_delta = player->sprite->rect->x + player->sprite->rect->w / 2 - mouse_x;
-                int y_delta = player->sprite->rect->y + player->sprite->rect->h / 2 - mouse_y;
+                int x_delta = player->sprite->rect->x + player->sprite->rect->w / 2 - mouse_pos.x;
+                int y_delta = player->sprite->rect->y + player->sprite->rect->h / 2 - mouse_pos.y;
                 int angle = (int) ((atan2(y_delta, x_delta) * 180) / 3.1416);
                 if (angle < 0)
                         angle += 360;

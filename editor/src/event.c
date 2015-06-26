@@ -8,11 +8,6 @@ bool MouseMove()
                 return false;
 }
 
-void InitMouse()
-{
-        SDL_GetMouseState(&mouse_temp_pos.x, &mouse_temp_pos.y);
-}
-
 void InitEvent()
 {
         mouse_hold = false;
@@ -109,5 +104,14 @@ void CheckUserEvents()
 
         input_angle %= 360;
 
-        SDL_GetMouseState(&mouse_pos.x, &mouse_pos.y);
+        if (keystate[SDL_SCANCODE_X])
+                SDL_GetMouseState(&mouse_pos.x, NULL);
+        else if (keystate[SDL_SCANCODE_Y])
+                SDL_GetMouseState(NULL, &mouse_pos.y);
+        else
+                SDL_GetMouseState(&mouse_pos.x, &mouse_pos.y);
+
+        mouse_pos.x %= SWIDTH;
+        mouse_pos.y %= SHEIGHT;
+        SDL_WarpMouseInWindow(window, mouse_pos.x, mouse_pos.y);
 }

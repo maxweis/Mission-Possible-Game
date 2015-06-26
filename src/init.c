@@ -18,5 +18,4 @@ void InitSDL(char *caption)
 
         InitObject();
         InitEvent();
-        InitMouse();
 }

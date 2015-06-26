@@ -2,18 +2,10 @@
 
 bool MouseMove()
 {
-        if (temp_mouse_x == mouse_x && temp_mouse_y == mouse_y)
-                return false;
-        else{
-                temp_mouse_x = mouse_x;
-                temp_mouse_y = mouse_y;
+        if (event.motion.x > 0 || event.motion.y > 1)
                 return true;
-        }
-}
-
-void InitMouse()
-{
-        SDL_GetMouseState(&temp_mouse_x, &temp_mouse_y);
+        else
+                return true;
 }
 
 void InitEvent()
@@ -23,7 +15,12 @@ void InitEvent()
 }
 
 void HandleButtonPress(){
+        SDL_EventState(SDL_MOUSEMOTION, SDL_IGNORE);
+        SDL_PollEvent(&event);
+        keystate = SDL_GetKeyboardState(NULL);
+
         key_press = false;
+
         if (event.type == SDL_KEYDOWN){
                 if (!key_hold)
                         key_press = true;
@@ -49,16 +46,10 @@ void HandleButtonPress(){
 
 void CheckUserEvents()
 {
-        SDL_EventState(SDL_MOUSEMOTION, SDL_IGNORE);
-        SDL_PollEvent(&event);
         HandleButtonPress();
 
-        if (event.type == SDL_QUIT){
+        if (event.type == SDL_QUIT)
                 done = true;
-                SDL_Quit();
-        }
-
-        keystate = SDL_GetKeyboardState(NULL);
 
         if (keystate[SDL_SCANCODE_LSHIFT])
                 player->run = true;
@@ -77,5 +68,5 @@ void CheckUserEvents()
         if (keystate[SDL_SCANCODE_A])
                 player->move(LEFT);
 
-        SDL_GetMouseState(&mouse_x, &mouse_y);
+        SDL_GetMouseState(&mouse_pos.x, &mouse_pos.y);
 }

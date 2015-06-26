@@ -26,7 +26,6 @@ void AddLevelObject()
 
 void LoadLevel(char *level_name)
 {
-
         for (int i = 0; i < OBJECT_LIMIT; i++)
                 for (int n = 0; n < VALUES_NUMBER; n++)
                         object_values[i][n] = -1;

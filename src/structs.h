@@ -4,8 +4,8 @@
 #define STRUCTS_H
 
 typedef struct Vector{
-        float x;
-        float y;
+        int x;
+        int y;
 } Vector;
 
 typedef struct Sprite{
