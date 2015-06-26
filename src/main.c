@@ -9,7 +9,7 @@ int main(int argc, char *argv[])
 
         player = CreatePlayer();
 
-        LoadLevel("level1");
+        LoadLevel("level/level1");
 
         while (!done){
                 LimitFrames();

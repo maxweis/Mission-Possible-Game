@@ -1,4 +1,4 @@
-WINDOWS_FLAGS = -lSDL2main -lSDL2 -lSDL2_image -lSDL2_ttf -mwindows -municode -mwin32
+WINDOWS_FLAGS = -lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lSDL2_ttf -mwindows
 
 OUTPUT=exec
 
