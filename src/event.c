@@ -52,6 +52,9 @@ void CheckUserEvents()
         if (event.type == SDL_QUIT)
                 done = true;
 
+        if (keystate[SDL_SCANCODE_ESCAPE])
+                done = true;
+
         if (keystate[SDL_SCANCODE_LSHIFT])
                 player->run = true;
         else
