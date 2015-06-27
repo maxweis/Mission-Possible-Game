@@ -14,7 +14,8 @@ void InitEvent()
         key_hold = false;
 }
 
-void HandleButtonPress(){
+void HandleButtonPress()
+{
         SDL_EventState(SDL_MOUSEMOTION, SDL_IGNORE);
         SDL_PollEvent(&event);
         keystate = SDL_GetKeyboardState(NULL);
