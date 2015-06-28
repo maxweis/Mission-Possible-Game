@@ -54,8 +54,6 @@ void RenderObject()
 TTF_Font *mono_font = NULL;
 void InitRenderText(char *font)
 {
-        if (TTF_Init())
-                fprintf(stderr, "TTF_Init() failed (install sdl2_ttf) : %s\n", TTF_GetError());
         mono_font = TTF_OpenFont(font, 12);
         if (mono_font == NULL)
                 fprintf(stderr, "Missing font: %s\n", TTF_GetError());

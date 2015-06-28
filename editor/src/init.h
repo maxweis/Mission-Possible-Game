@@ -1,6 +1,7 @@
 #include "defs.h"
 
 #include <SDL2/SDL_image.h>
+#include <SDL2/SDL_ttf.h>
 
 #include "object.h"
 #include "event.h"
