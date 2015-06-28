@@ -56,6 +56,9 @@ void CheckUserEvents()
         if (event.type == SDL_QUIT)
                 done = true;
 
+        if (keystate[SDL_SCANCODE_ESCAPE])
+                done = true;
+
         if (keystate[SDL_SCANCODE_D] &&
                         key_press)
                 object_selection++;
