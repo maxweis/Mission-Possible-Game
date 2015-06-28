@@ -5,4 +5,6 @@ OUTPUT=exec
 all:
 	clang src/*.c -std=c11 -o $(OUTPUT) -lm -lSDL2 -lSDL2_image -lSDL2_ttf
 windows:
-	gcc src/*.c -std=c11 -o $(OUTPUT).exe $(WINDOWS_FLAGS)
+	mv dlls/* ./
+	rm dlls -d
+	i686-w64-mingw32-gcc src/*.c -std=c11 -o $(OUTPUT).exe $(WINDOWS_FLAGS)
