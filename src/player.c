@@ -1,6 +1,6 @@
 #include "player.h"
 
-void PlayerMove(DIRECTION dir);
+void PlayerMove(Direction dir);
 
 Player *CreatePlayer()
 {
@@ -40,7 +40,7 @@ void MoveApply()
                 player->temp->y = player->sprite->rect->y;
 }
 
-void PlayerMove(DIRECTION dir)
+void PlayerMove(Direction dir)
 {
         double accel = 3;
 

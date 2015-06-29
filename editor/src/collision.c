@@ -1,6 +1,6 @@
 #include "collision.h"
 
-DIRECTION CollisionSide(SDL_Rect *a, SDL_Rect *b)
+Direction CollisionSide(SDL_Rect *a, SDL_Rect *b)
 {
         if (a->y <= b->y - (b->h / 2))
                 return DOWN;
@@ -13,7 +13,7 @@ DIRECTION CollisionSide(SDL_Rect *a, SDL_Rect *b)
         return NONE;
 }
 
-DIRECTION ScreenCollision(SDL_Rect *a)
+Direction ScreenCollision(SDL_Rect *a)
 {
         if (a->y < 0)
                 return UP;
@@ -26,7 +26,7 @@ DIRECTION ScreenCollision(SDL_Rect *a)
         return NONE;
 }
 
-DIRECTION Collision(SDL_Rect *a, SDL_Rect *b)
+Direction Collision(SDL_Rect *a, SDL_Rect *b)
 {
         int leftA, leftB;
         int rightA, rightB;

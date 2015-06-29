@@ -7,6 +7,6 @@ typedef enum{
         RIGHT,
         DOWN,
         LEFT
-} DIRECTION;
+} Direction;
 
 #endif

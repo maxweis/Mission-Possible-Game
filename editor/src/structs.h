@@ -27,7 +27,7 @@ typedef struct Player{
 
         bool run;
 
-        void (*move)(DIRECTION player);
+        void (*move)(Direction player);
 } Player;
 
 typedef struct View{
