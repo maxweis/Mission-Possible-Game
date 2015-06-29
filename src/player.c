@@ -36,8 +36,8 @@ void MoveApply()
                         player->sprite->rect->y = player->temp->y;
                 }
         }
-                player->temp->x = player->sprite->rect->x;
-                player->temp->y = player->sprite->rect->y;
+        player->temp->x = player->sprite->rect->x;
+        player->temp->y = player->sprite->rect->y;
 }
 
 void PlayerMove(Direction dir)
