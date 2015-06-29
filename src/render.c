@@ -10,9 +10,7 @@ void RenderCursor()
 {
         if (cursor == NULL)
                 InitRenderCursor();
-        int x, y;
-        SDL_GetMouseState(&x, &y);
-        SDL_Rect mouse = {x - 15, y - 15, 31, 31};
+        SDL_Rect mouse = {mouse_pos.x - 15, mouse_pos.y - 15, 31, 31};
         SDL_RenderCopy(render, cursor, NULL, &mouse); 
 }
 

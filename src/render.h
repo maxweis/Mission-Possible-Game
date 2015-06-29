@@ -2,6 +2,7 @@
 
 #include <SDL2/SDL_ttf.h>
 
+#include "event.h"
 #include "object.h"
 
 extern Player *player;
