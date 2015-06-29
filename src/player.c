@@ -30,7 +30,7 @@ Player *CreatePlayer()
 
 void MoveApply()
 {
-        if (!ScreenCollision(player->temp)){
+        if (!ScreenCollision(player->temp, 5)){
                 if (!ObjectCollision(player->temp)){
                         player->sprite->rect->x = player->temp->x;
                         player->sprite->rect->y = player->temp->y;
