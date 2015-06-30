@@ -1,7 +1,5 @@
 #include "player.h"
 
-void PlayerMove(Direction dir);
-
 Player *CreatePlayer()
 {
         Player *temp = malloc(sizeof(Player));
@@ -16,8 +14,8 @@ Player *CreatePlayer()
 
         temp->move = &PlayerMove;
 
-        temp->sprite->rect->x = 50;
-        temp->sprite->rect->y = 50;
+        temp->sprite->rect->x = SWIDTH / 2;
+        temp->sprite->rect->y = SHEIGHT / 2;
 
         temp->sprite->w = temp->sprite->rect->w;
         temp->sprite->h = temp->sprite->rect->h;
@@ -26,6 +24,25 @@ Player *CreatePlayer()
         *temp->temp = *temp->sprite->rect;
 
         return temp;
+}
+
+void UpdateView()
+{
+        Direction view_collision = ViewCollision(player->sprite->rect, 200);
+
+        if (view_collision == UP)
+                view->offset.y--;
+        if (view_collision == RIGHT)
+                view->offset.x++;
+        if (view_collision == DOWN)
+                view->offset.y++;
+        if (view_collision == LEFT)
+                view->offset.x--;
+}
+
+void InitView()
+{
+        view = calloc(0, sizeof(View));
 }
 
 void MoveApply()

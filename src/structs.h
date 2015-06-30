@@ -31,8 +31,8 @@ typedef struct Player{
 } Player;
 
 typedef struct View{
-        int x, y;
-} Camera;
+        Vector offset;
+} View;
 
 typedef struct Object{
         Sprite *sprite;
