@@ -30,7 +30,13 @@ typedef struct Player{
         void (*move)(Direction player);
 } Player;
 
+typedef struct Map{
+        SDL_Rect *rect;
+        Vector tiles;
+} Map;
+
 typedef struct View{
+        SDL_Rect *rect;
         Vector offset;
 } View;
 

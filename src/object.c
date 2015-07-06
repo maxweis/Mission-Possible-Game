@@ -2,8 +2,9 @@
 
 bool ObjectCollision(SDL_Rect *rect)
 {
-        for (int i = 0; i < collision_object_number; i++)
-                if (Collision(collision_objects[i].sprite->rect, rect) != NONE)
+        for (int i = 0; i < object_number; i++)
+                if (objects[i].solid && 
+                                Collision(objects[i].sprite->rect, rect) != NONE)
                         return true;
         return false;
 }
@@ -18,17 +19,13 @@ int CountList(char **list)
 
 void InitObject()
 {
-        collision_object_number = 0;
-        render_object_number = 0;
+        object_number = 0;
         object_amount = CountList(object_list);
 }
 
 void AddObject(Object object)
 {
-        if (object.solid){
-                collision_objects[collision_object_number++] = object;
-        }
-        render_objects[render_object_number++] = object;
+        objects[object_number++] = object;
 }
 
 Object *CreateObject(bool solid, int x, int y, int width, int height, int scale, int id, int angle)

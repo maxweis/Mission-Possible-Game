@@ -4,11 +4,11 @@ Direction CollisionSide(SDL_Rect *a, SDL_Rect *b)
 {
         if (a->y >= b->y + (b->h / 2))
                 return UP;
-        if (a->x > b->x)
+        if (a->x >= b->x)
                 return RIGHT;
         if (a->y <= b->y - (b->h / 2))
                 return DOWN;
-        if (a->x < b->x)
+        if (a->x <= b->x)
                 return LEFT;
         return NONE;
 }
@@ -54,11 +54,11 @@ Direction BorderCollision(SDL_Rect *a, SDL_Rect *b, int border)
 
 Direction ViewCollision(SDL_Rect *a, int view_length)
 {
-        SDL_Rect view = {SWIDTH / 2, SHEIGHT /2, view_length, view_length};
+        SDL_Rect view = {SWIDTH / 2 - view_length / 2, 
+                SHEIGHT / 2 - view_length / 2, view_length, view_length};
 
-        return BorderCollision(&view, a, 1366);
+        return !(Collision(a, &view));
 }
-        
 
 Direction ScreenCollision(SDL_Rect *a, int border)
 {

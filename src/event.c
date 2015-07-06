@@ -45,7 +45,7 @@ void HandleButtonPress()
                 mouse_hold = false;
 }
 
-void CheckUserEvents()
+void CheckUniversalEvents()
 {
         HandleButtonPress();
 
@@ -54,6 +54,30 @@ void CheckUserEvents()
 
         if (keystate[SDL_SCANCODE_ESCAPE])
                 done = true;
+}
+
+void CheckMenuEvents()
+{
+        CheckUniversalEvents();
+
+        if ((keystate[SDL_SCANCODE_W] || keystate[SDL_SCANCODE_UP]) &&
+                        key_press)
+                menu_selection--;
+
+        if ((keystate[SDL_SCANCODE_S] || keystate[SDL_SCANCODE_DOWN]) &&
+                        key_press)
+                menu_selection++;
+
+        if (keystate[SDL_SCANCODE_RETURN] || keystate[SDL_SCANCODE_SPACE] ||
+                        (mouse_click && event.button.button == SDL_BUTTON_LEFT))
+                menu_enter = true;
+
+        SDL_GetMouseState(&mouse_pos.x, &mouse_pos.y);
+}
+
+void CheckGameEvents()
+{
+        CheckUniversalEvents();
 
         if (keystate[SDL_SCANCODE_LSHIFT])
                 player->run = true;

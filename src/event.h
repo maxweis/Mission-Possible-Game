@@ -2,9 +2,12 @@
 
 extern bool done;
 extern Player *player;
+extern int menu_selection;
+extern int menu_enter;
 
 bool MouseMove();
 void CheckUserEvents();
+void CheckMenuEvents();
 void InitMouse();
 void InitEvent();
 

@@ -1,14 +1,14 @@
 #include "defs.h"
 
-#include "event.h"
-#include "init.h"
-#include "level.h"
-#include "object.h"
-#include "player.h"
-#include "render.h"
-#include "timer.h"
-
 extern long buffer;
 
 Player *player;
 bool done;
+
+void InitSDL(char *caption);
+void LoadLevel(char *level_name);
+void LimitFrames();
+void CheckGameEvents();
+void PlayerUpdate();
+void RenderGameScreen();
+void StartMenu();

@@ -1,5 +1,18 @@
 #include "init.h"
 
+void InitView()
+{
+        view = malloc(sizeof(View));
+        view->rect = calloc(0, sizeof(SDL_Rect));
+        view->rect->w = SWIDTH;
+        view->rect->h = SHEIGHT;
+}
+
+void InitPlayer()
+{
+        player = CreatePlayer();
+}
+
 void InitSDL(char *caption)
 {
         if (SDL_Init(SDL_INIT_EVERYTHING))
@@ -20,6 +33,6 @@ void InitSDL(char *caption)
         SDL_RenderSetLogicalSize(render, SWIDTH, SHEIGHT);
 
         InitEvent();
-        InitObject();
+        InitPlayer();
         InitView();
 }

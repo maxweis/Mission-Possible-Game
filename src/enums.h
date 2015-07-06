@@ -2,11 +2,11 @@
 #define ENUMS_H
 
 typedef enum{
+        DOWN = -2,
+        LEFT,
         NONE,
-        UP,
         RIGHT,
-        DOWN,
-        LEFT
+        UP
 } Direction;
 
 #endif
