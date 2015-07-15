@@ -1,5 +1,6 @@
 #include "defs.h"
 
+#include <string.h>
 #include <math.h>
 
 extern Player *player;

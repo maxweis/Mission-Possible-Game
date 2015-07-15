@@ -15,10 +15,6 @@ int main(int argc, char *argv[])
 
                 PlayerUpdate();
 
-                UpdateObjects();
-
-                UpdateView();
-
                 RenderGameScreen();
         }
 

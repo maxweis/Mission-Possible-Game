@@ -6,8 +6,6 @@ void InitView()
         view->rect = calloc(0, sizeof(SDL_Rect));
         view->rect->w = SWIDTH;
         view->rect->h = SHEIGHT;
-        view->offset.x = 0;
-        view->offset.y = 0;
 }
 
 void InitPlayer()

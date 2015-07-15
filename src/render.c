@@ -71,10 +71,8 @@ void RenderText(char *text, SDL_Rect box, char *font, SDL_Color color, int size,
 
         SDL_Surface *text_surface = TTF_RenderText_Solid(mono_font, text, color);
 
-        if (box.w == 0 || box.h == 0){
-                box.w = text_surface->w;
-                box.h = text_surface->h;
-        }
+        box.w = text_surface->w;
+        box.h = text_surface->h;
 
         if (center)
                 box.x -= box.w / 2;
@@ -105,13 +103,13 @@ void RenderBackground(char *background_path)
 void RenderStartMenu()
 {
         SDL_Rect option_1 = {SWIDTH / 2 - 50, SHEIGHT * (1.0 / 4), 
-                IDK, IDK};
+                100, 100};
 
         SDL_Rect option_2 = {SWIDTH / 2 - 50, SHEIGHT * (2.0 / 4), 
-                IDK, IDK};
+                100, 100};
 
         SDL_Rect option_3 = {SWIDTH / 2 - 50, SHEIGHT * (3.0 / 4), 
-                IDK, IDK};
+                100, 100};
 
         SDL_Color white = {255, 255, 255};
         SDL_Color red = {255, 0, 0};

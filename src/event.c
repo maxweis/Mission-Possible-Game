@@ -96,7 +96,5 @@ void CheckGameEvents()
         if (keystate[SDL_SCANCODE_A])
                 player->move(LEFT);
 
-        /*if (keystate[SDL_SCANCODE_SPACE])*/
-
         SDL_GetMouseState(&mouse_pos.x, &mouse_pos.y);
 }
