@@ -2,23 +2,21 @@
 
 int main(int argc, char *argv[])
 {
-        InitSDL("Platformer");
+        SDLInit("Platformer");
+
+        LevelLoad("level/level1");
 
         StartMenu();
 
-        LoadLevel("level/level1");
-
         while (!done){
-                LimitFrames();
+                FramesLimit();
 
-                CheckGameEvents();
+                GameEventsCheck();
 
                 PlayerUpdate();
 
-                RenderGameScreen();
+                GameScreenRender();
         }
-
-        /*QuitSDL();*/
 
         return 0;
 }

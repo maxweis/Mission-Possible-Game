@@ -1,3 +1,4 @@
+#pragma once
 #include "defs.h"
 
 #include <string.h>
@@ -14,5 +15,6 @@ extern Vector mouse_pos;
 extern int object_number;
 extern int menu_selection;
 
-void RenderGameScreen();
-void RenderStartMenu();
+void GameScreenRender();
+void StartMenuRender();
+void TextRender(char *text, SDL_Rect box, char *font, SDL_Color color, int size, bool center);

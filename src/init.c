@@ -1,6 +1,6 @@
 #include "init.h"
 
-void InitView()
+void ViewInit()
 {
         view = malloc(sizeof(View));
         view->rect = calloc(0, sizeof(SDL_Rect));
@@ -8,12 +8,12 @@ void InitView()
         view->rect->h = SHEIGHT;
 }
 
-void InitPlayer()
+void PlayerInit()
 {
-        player = CreatePlayer();
+        player = PlayerCreate();
 }
 
-void InitSDL(char *caption)
+void SDLInit(char *caption)
 {
         if (SDL_Init(SDL_INIT_EVERYTHING))
                 fprintf(stderr, "Unable to initialize SDL2: %s\n", SDL_GetError());
@@ -32,7 +32,7 @@ void InitSDL(char *caption)
         SDL_SetRelativeMouseMode(true);
         SDL_RenderSetLogicalSize(render, SWIDTH, SHEIGHT);
 
-        InitEvent();
-        InitPlayer();
-        InitView();
+        EventInit();
+        PlayerInit();
+        ViewInit();
 }

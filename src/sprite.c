@@ -18,6 +18,10 @@ Sprite *SpriteInit(int width, int height, int scale, const char *image_path)
 
         temp->rect = calloc(0, sizeof(SDL_Rect));
 
+        temp->frame = 0;
+        temp->temp_angle = 0;
+        temp->angle = 0;
+
         if (height == 0 || width == 0){
                 SDL_QueryTexture(temp->image, NULL, NULL, &temp->rect->w, &temp->rect->h);
                 temp->rect->w *= temp->scale;

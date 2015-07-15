@@ -1,3 +1,4 @@
+#pragma once
 #include "defs.h"
 
 #include <SDL2/SDL_image.h>

@@ -7,12 +7,12 @@ void OptionsMenu()
 void StartMenu()
 {
         while (!menu_enter && !done){
-                CheckMenuEvents();
+                MenuEventsCheck();
                 if (menu_selection > 0)
                         menu_selection %= 3;
                 else
                         menu_selection = 0;
-                RenderStartMenu();
+                StartMenuRender();
         }
 
         if (!done){

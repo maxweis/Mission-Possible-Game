@@ -1,14 +1,19 @@
+#pragma once
 #include "defs.h"
+
+#include "dir.h"
+#include "sprite.h"
+#include "collision.h"
 
 extern char *object_list[];
 
-bool ObjectCollision(SDL_Rect *rect);
-Object *CreateObject(bool solid, int x, int y, int width, int height, int scale, int id, int angle);
-void AddObject(Object object);
+Object *ObjectCreate(bool solid, int x, int y, int width, int height, int scale, int id, int angle, int vel_x, int vel_y);
+void ObjectAdd(Object object);
+void ObjectUpdate();
+void ObjectMove(Object *object);
+void ObjectMoveApply(Object *object);
+void ObjectReset(Object *object);
 
 Object objects[OBJECT_LIMIT];
 int object_number;
 int object_amount;
-
-Direction Collision(SDL_Rect *a, SDL_Rect *b);
-Sprite *SpriteInit(int width, int height, int scale, const char *image_path);

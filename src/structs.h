@@ -1,7 +1,6 @@
-#include "enums.h"
+#pragma once
 
-#ifndef STRUCTS_H
-#define STRUCTS_H
+#include "enums.h"
 
 typedef struct Vector{
         int x;
@@ -15,19 +14,30 @@ typedef struct Sprite{
         int scale;
         SDL_Texture *image;
         SDL_Rect *rect;
-        int w, h;
 
         void (*destroy)(void *self);
 } Sprite;
 
-typedef struct Player{
+typedef struct Object{
         Sprite *sprite;
 
-        SDL_Rect *temp;
+        bool solid;
+
+        Vector vel;
+
+        Direction move;
+
+        SDL_Rect *temp_rect;
+
+        Vector dimensions;
+
+        int id;
+} Object;
+
+typedef struct Player{
+        Object *object;
 
         bool run;
-
-        void (*move)(Direction player);
 } Player;
 
 typedef struct Map{
@@ -40,13 +50,3 @@ typedef struct View{
         Vector offset;
 } View;
 
-typedef struct Object{
-        Sprite *sprite;
-
-        bool solid;
-
-        Vector vel;
-
-        int id;
-} Object;
-#endif

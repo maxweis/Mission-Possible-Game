@@ -2,15 +2,32 @@
 
 Direction CollisionSide(SDL_Rect *a, SDL_Rect *b)
 {
+        Direction dir = NONE;
         if (a->y >= b->y + (b->h / 2))
-                return UP;
-        if (a->x >= b->x)
-                return RIGHT;
-        if (a->y <= b->y - (b->h / 2))
-                return DOWN;
-        if (a->x <= b->x)
-                return LEFT;
-        return NONE;
+                dir = NORTH;
+
+        if (a->x >= b->x){
+                if (dir)
+                        dir = mean(dir, EAST);
+                else
+                        dir = EAST;
+        }
+
+        if (a->y <= b->y - (b->h / 2)){
+                if (dir)
+                        dir = mean(dir, SOUTH);
+                else
+                        dir = SOUTH;
+        }
+
+        if (a->x <= b->x){
+                if (dir)
+                        dir = mean(dir, WEST);
+                else
+                        dir = WEST;
+        }
+
+        return dir;
 }
 
 Direction Collision(SDL_Rect *a, SDL_Rect *b)
@@ -41,15 +58,32 @@ Direction Collision(SDL_Rect *a, SDL_Rect *b)
 
 Direction BorderCollision(SDL_Rect *a, SDL_Rect *b, int border)
 {
+        Direction dir;
         if (a->y - border <= b->y && a->y >= b->y)
-                return UP;
-        if (a->x + a->w + border >= b->x + b->w && a->x + a->w <= b->x + b->w)
-                return RIGHT;
-        if (a->y + a->h + border >= b->y + b->h && a->y + a->h <= b->y + b->h)
-                return DOWN;
-        if (a->x - border <= b->x && a->x >= b->x)
-                return LEFT;
-        return NONE;
+                dir = NORTH;
+
+        if (a->x + a->w + border >= b->x + b->w && a->x + a->w <= b->x + b->w){
+                if (dir)
+                        dir = mean(dir, EAST);
+                else
+                        dir = EAST;
+                }
+
+        if (a->y + a->h + border >= b->y + b->h && a->y + a->h <= b->y + b->h){
+                if (dir)
+                        dir = mean(dir, SOUTH);
+                else
+                        dir = SOUTH;
+        }
+
+        if (a->x - border <= b->x && a->x >= b->x){
+                if (dir)
+                        dir = mean(dir, WEST);
+                else
+                        dir = WEST;
+        }
+
+        return dir;
 }
 
 Direction ViewCollision(SDL_Rect *a, int view_length)
@@ -67,6 +101,16 @@ Direction ScreenCollision(SDL_Rect *a, int border)
         return BorderCollision(a, &screen, border);
 }
 
-void UpdateBound(Sprite *sprite) //fix w and h after rotation
+void BoundUpdate(Sprite *sprite) //fix w and h after rotation
 {
 }
+
+bool ObjectsCollision(SDL_Rect *rect)
+{
+        for (int i = 0; i < object_number; i++)
+                if (objects[i].solid && 
+                                Collision(objects[i].sprite->rect, rect) != NONE)
+                        return true;
+        return false;
+}
+

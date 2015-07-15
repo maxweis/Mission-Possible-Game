@@ -1,5 +1,5 @@
 #include "defs.h"
 
-void LimitFrames();
+void FramesLimit();
 
 long buffer;

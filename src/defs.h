@@ -1,3 +1,5 @@
+#pragma once
+
 #include <SDL2/SDL.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -16,3 +18,4 @@ SDL_Renderer *render;
 View *view;
 Map *map;
 Player *player;
+bool done;

@@ -11,7 +11,7 @@ Uint32 TimeLeft()
                 return next_time - now;
 }
 
-void LimitFrames()
+void FramesLimit()
 {
         buffer++;
         SDL_Delay(TimeLeft());

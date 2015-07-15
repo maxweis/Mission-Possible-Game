@@ -1,6 +1,7 @@
 #include "level.h"
 
 char *object_list[] = {
+        "art/sprites/main/base.png",
         "art/sprites/object/glass_64.png",
         "art/sprites/object/glass_32.png",
         "art/sprites/object/foliage_64.png",
@@ -15,16 +16,16 @@ char *background_list[] = {
         "art/backgrounds/grass.png"
 };
 
-void AddLevelObject()
+void LevelObjectAdd()
 {
         for (int n = 0; object_values[n][0] != -1; n++)
-                AddObject(*CreateObject(object_values[n][0],
+                ObjectAdd(*ObjectCreate(object_values[n][0],
                                         object_values[n][1], object_values[n][2], 
                                         IDK, IDK, object_values[n][3], object_values[n][4],
-                                        (int) object_values[n][5]));
+                                        (int) object_values[n][5], 0, 0));
 }
 
-void InitMap(Vector tiles)
+void MapInit(Vector tiles)
 {
         map = malloc(sizeof(Map));
         map->rect = calloc(0, sizeof(SDL_Rect));
@@ -35,7 +36,7 @@ void InitMap(Vector tiles)
         map->tiles = tiles;
 }
 
-void LoadLevel(char *level_name)
+void LevelLoad(char *level_name)
 {
         for (int i = 0; i < OBJECT_LIMIT; i++)
                 for (int n = 0; n < VALUES_NUMBER; n++)
@@ -55,7 +56,7 @@ void LoadLevel(char *level_name)
                         n++;
                 }
         }
-        AddLevelObject();
+        LevelObjectAdd();
         Vector tiles = {1, 1};
-        InitMap(tiles);
+        MapInit(tiles);
 }

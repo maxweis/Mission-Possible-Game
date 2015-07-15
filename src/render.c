@@ -1,36 +1,36 @@
 #include "render.h"
 
 SDL_Texture *cursor = NULL;
-void InitRenderCursor()
+void InitCursorRender()
 {
         cursor = IMG_LoadTexture(render, "art/cursors/game.png");
 }
 
-void RenderCursor()
+void CursorRender()
 {
         if (cursor == NULL)
-                InitRenderCursor();
+                InitCursorRender();
         SDL_Rect mouse = {mouse_pos.x - 15, mouse_pos.y - 15, 31, 31};
         SDL_RenderCopy(render, cursor, NULL, &mouse); 
 }
 
-void RenderPlayer()
+void PlayerRender()
 {
-        SDL_Rect sprite = {player->sprite->rect->x,
-               player->sprite->rect->y,
-               player->sprite->w,
-               player->sprite->h};
+        SDL_Rect sprite = {player->object->sprite->rect->x,
+               player->object->sprite->rect->y,
+               player->object->sprite->rect->w,
+               player->object->sprite->rect->h};
 
-        SDL_Rect slide = {player->sprite->w / player->sprite->scale * player->sprite->frame,
+        SDL_Rect slide = {player->object->sprite->rect->w / player->object->sprite->scale * player->object->sprite->frame,
                0,
-               player->sprite->w / player->sprite->scale,
-               player->sprite->h / player->sprite->scale};
+               player->object->sprite->rect->w / player->object->sprite->scale,
+               player->object->sprite->rect->h / player->object->sprite->scale};
 
-        SDL_RenderCopyEx(render, player->sprite->image, &slide, &sprite,
-                        player->sprite->angle, NULL, SDL_FLIP_NONE);
+        SDL_RenderCopyEx(render, player->object->sprite->image, &slide, &sprite,
+                        player->object->sprite->angle, NULL, SDL_FLIP_NONE);
 }
 
-void RenderObject()
+void ObjectRender()
 {
         if (object_number != 0){
                 for (int i = 0; i < object_number; i++){
@@ -52,21 +52,21 @@ void RenderObject()
 TTF_Font *mono_font = NULL;
 int font_size = 0;
 char font_name[256];
-void InitRenderText(char *font)
+void InitTextRender(char *font)
 {
         mono_font = TTF_OpenFont(font, font_size);
         if (mono_font == NULL)
                 fprintf(stderr, "Missing font: %s\n", TTF_GetError());
 }
 
-void RenderText(char *text, SDL_Rect box, char *font, SDL_Color color, int size, bool center)
+void TextRender(char *text, SDL_Rect box, char *font, SDL_Color color, int size, bool center)
 {
         if (mono_font == NULL || font_size != size ||
                         !strcmp(font_name, font)){
                 TTF_CloseFont(mono_font);
                 strcpy(font_name, font);
                 font_size = size;
-                InitRenderText(font);
+                InitTextRender(font);
         }
 
         SDL_Surface *text_surface = TTF_RenderText_Solid(mono_font, text, color);
@@ -85,22 +85,22 @@ void RenderText(char *text, SDL_Rect box, char *font, SDL_Color color, int size,
 }
 
 SDL_Texture *background = NULL;
-void InitRenderBackground(char *background_path)
+void InitBackgroundRender(char *background_path)
 {
         background = IMG_LoadTexture(render, background_path); 
 }
 
-void RenderBackground(char *background_path)
+void BackgroundRender(char *background_path)
 {
         SDL_Rect size = {0, 0, SWIDTH, SHEIGHT};
 
         if (background == NULL)
-                InitRenderBackground(background_path);
+                InitBackgroundRender(background_path);
 
         SDL_RenderCopy(render, background, NULL, &size);
 }
 
-void RenderStartMenu()
+void StartMenuRender()
 {
         SDL_Rect option_1 = {SWIDTH / 2 - 50, SHEIGHT * (1.0 / 4), 
                 100, 100};
@@ -116,24 +116,24 @@ void RenderStartMenu()
 
         SDL_RenderClear(render);
 
-        RenderText("Start Game", option_1, "art/fonts/UbuntuMono-R.ttf", 
+        TextRender("Start Game", option_1, "art/fonts/UbuntuMono-R.ttf", 
                         menu_selection == 0 ? red : white, 72, true);
-        RenderText("Options", option_2, "art/fonts/UbuntuMono-R.ttf",
+        TextRender("Options", option_2, "art/fonts/UbuntuMono-R.ttf",
                         menu_selection == 1 ? red : white, 72, true);
-        RenderText("Exit", option_3, "art/fonts/UbuntuMono-R.ttf",
+        TextRender("Exit", option_3, "art/fonts/UbuntuMono-R.ttf",
                         menu_selection == 2 ? red : white, 72, true);
 
         SDL_RenderPresent(render);
 }
 
-void RenderGameScreen()
+void GameScreenRender()
 {
         SDL_RenderClear(render);
 
-        RenderBackground(background_list[level_background]);
-        RenderPlayer();
-        RenderObject();
-        RenderCursor();
+        BackgroundRender(background_list[level_background]);
+        PlayerRender();
+        ObjectRender();
+        CursorRender();
 
         SDL_RenderPresent(render);
 }

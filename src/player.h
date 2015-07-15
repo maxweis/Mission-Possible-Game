@@ -1,7 +1,12 @@
+#pragma once
 #include "defs.h"
-
 #include <string.h>
-#include <math.h>
+
+#include "collision.h"
+#include "event.h"
+#include "math.h"
+#include "object.h"
+#include "sprite.h"
 
 extern Player *player;
 extern long buffer;
@@ -10,15 +15,8 @@ extern int object_number;
 extern View *view;
 extern Vector mouse_pos;
 
-Player *CreatePlayer();
+Player *PlayerCreate();
 void PlayerAnimate();
 void PlayerMouseRotate();
 void PlayerUpdate();
 void PlayerMove(Direction dir);
-void InitView();
-
-Sprite *SpriteInit(int width, int height, int scale, const char *image_path);
-Direction ViewCollision(SDL_Rect *a, int view_length);
-Direction ScreenCollision(SDL_Rect *a, int border);
-bool MouseMove();
-bool ObjectCollision(SDL_Rect *rect);

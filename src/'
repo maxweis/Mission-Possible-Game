@@ -19,7 +19,7 @@ void ObjectAdd(Object object)
         objects[object_number++] = object;
 }
 
-Object *ObjectCreate(bool solid, int x, int y, int width, int height, int scale, int id, int angle, int vel_x, int vel_y)
+Object *CreateObject(bool solid, int x, int y, int width, int height, int scale, int id, int angle)
 {
         Object *temp = malloc(sizeof(Object));
         temp->sprite = SpriteInit(width, height, scale, object_list[id]);
@@ -40,25 +40,20 @@ Object *ObjectCreate(bool solid, int x, int y, int width, int height, int scale,
         temp->dimensions.x = temp->sprite->rect->w;
         temp->dimensions.y = temp->sprite->rect->h;
 
-        temp->vel.x = vel_x;
-        temp->vel.y = vel_y;
+        temp->vel.x = 0;
+        temp->vel.y = 0;
 
         temp->solid = solid;
         return temp;
 }
 
-void ObjectReset(Object *object)
-{
-        object->move = DirUpdate(NONE);
-}
-
 void ObjectMove(Object *object)
 {
         Vector vel = object->vel;
-        static double accel = 1;
+        static double accel = .3;
 
-        /*if (accel < 1)*/
-                /*accel += .1;*/
+        if (accel < 1)
+                accel += .1;
 
         switch(object->move){
                 case NORTH:
@@ -96,12 +91,12 @@ void ObjectMoveApply(Object *object)
 {
         if (!ScreenCollision(object->temp_rect, 5)){
                 if (!ObjectsCollision(object->temp_rect)){
-                        object->sprite->rect->x = object->temp_rect->x;
-                        object->sprite->rect->y = object->temp_rect->y;
+                        object->sprite->rect->x = player->object->temp_rect->x;
+                        object->sprite->rect->y = player->object->temp_rect->y;
                 }
         }
-        object->temp_rect->x = object->sprite->rect->x;
-        object->temp_rect->y = object->sprite->rect->y;
+        player->object->temp_rect->x = player->object->sprite->rect->x;
+        player->object->temp_rect->y = player->object->sprite->rect->y;
 }
 
 void UpdateObject()

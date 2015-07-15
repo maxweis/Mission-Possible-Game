@@ -1,12 +1,13 @@
-#ifndef ENUMS_H
-#define ENUMS_H
+#pragma once
 
 typedef enum{
-        DOWN = -2,
-        LEFT,
+        NORTH = -4,
+        NORTHWEST,
+        WEST,
+        NORTHEAST,
         NONE,
-        RIGHT,
-        UP
+        SOUTHWEST,
+        EAST,
+        SOUTHEAST,
+        SOUTH
 } Direction;
-
-#endif

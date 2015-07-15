@@ -1,15 +1,20 @@
+#pragma once
 #include "defs.h"
+
+#include "dir.h"
+#include "maths.h"
 
 extern bool done;
 extern Player *player;
 extern int menu_selection;
-extern int menu_enter;
+extern bool menu_enter;
 
 bool MouseMove();
-void CheckUserEvents();
-void CheckMenuEvents();
-void InitMouse();
-void InitEvent();
+void UserEventsCheck();
+void GameEventsCheck();
+void MenuEventsCheck();
+void MouseInit();
+void EventInit();
 
 Vector mouse_pos;
 bool mouse_click;

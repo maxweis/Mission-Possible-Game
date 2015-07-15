@@ -8,13 +8,13 @@ bool MouseMove()
                 return true;
 }
 
-void InitEvent()
+void EventInit()
 {
         mouse_hold = false;
         key_hold = false;
 }
 
-void HandleButtonPress()
+void ButtonPressHandle()
 {
         SDL_EventState(SDL_MOUSEMOTION, SDL_IGNORE);
         SDL_PollEvent(&event);
@@ -45,9 +45,9 @@ void HandleButtonPress()
                 mouse_hold = false;
 }
 
-void CheckUniversalEvents()
+void UniversalEventsCheck()
 {
-        HandleButtonPress();
+        ButtonPressHandle();
 
         if (event.type == SDL_QUIT)
                 done = true;
@@ -56,9 +56,9 @@ void CheckUniversalEvents()
                 done = true;
 }
 
-void CheckMenuEvents()
+void MenuEventsCheck()
 {
-        CheckUniversalEvents();
+        UniversalEventsCheck();
 
         if ((keystate[SDL_SCANCODE_W] || keystate[SDL_SCANCODE_UP]) &&
                         key_press)
@@ -75,26 +75,24 @@ void CheckMenuEvents()
         SDL_GetMouseState(&mouse_pos.x, &mouse_pos.y);
 }
 
-void CheckGameEvents()
+void GameEventsCheck()
 {
-        CheckUniversalEvents();
+        UniversalEventsCheck();
 
         if (keystate[SDL_SCANCODE_LSHIFT])
                 player->run = true;
-        else
-                player->run = false;
 
         if (keystate[SDL_SCANCODE_W])
-                player->move(UP);
+                player->object->move = DirUpdate(NORTH);
 
         if (keystate[SDL_SCANCODE_D])
-                player->move(RIGHT);
+                player->object->move = DirUpdate(EAST);
 
         if (keystate[SDL_SCANCODE_S])
-                player->move(DOWN);
+                player->object->move = DirUpdate(SOUTH);
 
         if (keystate[SDL_SCANCODE_A])
-                player->move(LEFT);
+                player->object->move = DirUpdate(WEST);
 
         SDL_GetMouseState(&mouse_pos.x, &mouse_pos.y);
 }
