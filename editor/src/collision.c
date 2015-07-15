@@ -13,19 +13,6 @@ Direction CollisionSide(SDL_Rect *a, SDL_Rect *b)
         return NONE;
 }
 
-Direction ScreenCollision(SDL_Rect *a)
-{
-        if (a->y < 0)
-                return UP;
-        if (a->x + a->w > SWIDTH)
-                return RIGHT;
-        if (a->y + a->h > SHEIGHT)
-                return DOWN;
-        if (a->x < 0)
-                return LEFT;
-        return NONE;
-}
-
 Direction Collision(SDL_Rect *a, SDL_Rect *b)
 {
         int leftA, leftB;
@@ -50,6 +37,34 @@ Direction Collision(SDL_Rect *a, SDL_Rect *b)
                 return NONE;
         else
                 return CollisionSide(a, b);
+}
+
+Direction BorderCollision(SDL_Rect *a, SDL_Rect *b, int border)
+{
+        if (a->y - border <= b->y && a->y >= b->y)
+                return UP;
+        if (a->x + a->w + border >= b->x + b->w && a->x + a->w <= b->x + b->w)
+                return RIGHT;
+        if (a->y + a->h + border >= b->y + b->h && a->y + a->h <= b->y + b->h)
+                return DOWN;
+        if (a->x - border <= b->x && a->x >= b->x)
+                return LEFT;
+        return NONE;
+}
+
+Direction ViewCollision(SDL_Rect *a, int view_length)
+{
+        SDL_Rect view = {SWIDTH / 2, SHEIGHT /2, view_length, view_length};
+
+        return BorderCollision(&view, a, 1366);
+}
+        
+
+Direction ScreenCollision(SDL_Rect *a, int border)
+{
+        SDL_Rect screen = {0, 0, 1366, 768};
+
+        return BorderCollision(a, &screen, border);
 }
 
 void UpdateBound(Sprite *sprite) //fix w and h after rotation
