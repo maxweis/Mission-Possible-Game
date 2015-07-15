@@ -12,3 +12,5 @@ void CheckGameEvents();
 void PlayerUpdate();
 void RenderGameScreen();
 void StartMenu();
+void UpdateObjects();
+void UpdateView();

@@ -9,6 +9,14 @@ bool ObjectCollision(SDL_Rect *rect)
         return false;
 }
 
+void ObjectViewUpdate()
+{
+        for (int i = 0; i < object_number; i++){
+                objects[i].sprite->rect->x -= view->offset.x;
+                objects[i].sprite->rect->y -= view->offset.y;
+        }
+}
+
 int CountList(char **list)
 {
         int i;
@@ -45,4 +53,9 @@ Object *CreateObject(bool solid, int x, int y, int width, int height, int scale,
 
         temp->solid = solid;
         return temp;
+}
+
+void UpdateObjects()
+{
+        ObjectViewUpdate();
 }

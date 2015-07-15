@@ -5,6 +5,7 @@ extern char *object_list[];
 bool ObjectCollision(SDL_Rect *rect);
 Object *CreateObject(bool solid, int x, int y, int width, int height, int scale, int id, int angle);
 void AddObject(Object object);
+void UpdateObjects();
 
 Object objects[OBJECT_LIMIT];
 int object_number;

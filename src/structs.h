@@ -26,8 +26,8 @@ typedef struct Player{
         SDL_Rect *temp;
 
         bool run;
-
-        void (*move)(Direction player);
+        
+        void (*move)(Direction dir);
 } Player;
 
 typedef struct Map{

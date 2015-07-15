@@ -8,10 +8,10 @@ void StartMenu()
 {
         while (!menu_enter && !done){
                 CheckMenuEvents();
-                if (menu_selection > 0)
+                if (menu_selection >= 0)
                         menu_selection %= 3;
                 else
-                        menu_selection = 0;
+                        menu_selection = 2;
                 RenderStartMenu();
         }
 

@@ -26,44 +26,6 @@ Player *CreatePlayer()
         return temp;
 }
 
-bool view_update = false;
-void UpdateView()
-{
-        Direction view_collision = ViewCollision(player->temp, 200);
-
-        if (view_update){
-                view->offset.x = 0;
-                view->offset.y = 0;
-        }
-        else{
-                switch(view_collision){
-                        view_update = true;
-                        case UP:
-                                view->offset.y -= 10;
-                                break;
-                        case RIGHT:
-                                view->offset.x += 10;
-                                break;
-                        case DOWN:
-                                view->offset.y += 10;
-                                break;
-                        case LEFT:
-                                view->offset.x -= 10;
-                                break;
-                        case NONE:
-                                break;
-                }
-        }
-}
-
-
-void PlayerUpdateView()
-{
-        UpdateView();
-        player->temp->x -= view->offset.x;
-        player->temp->y -= view->offset.y;
-}
-
 void MoveApply()
 {
         if (!ScreenCollision(player->temp, 5)){
@@ -83,20 +45,21 @@ void PlayerMove(Direction dir)
         if (player->run)
                 accel = 5;
 
-        if (dir == UP){
-                player->temp->y -= accel;
-        }
-
-        if (dir == RIGHT){
-                player->temp->x += accel;
-        }
-
-        if (dir == LEFT){
-                player->temp->x -= accel;
-        }
-
-        if (dir == DOWN){
-                player->temp->y += accel;
+        switch(dir){
+                case UP:
+                        player->temp->y -= accel;
+                        break;
+                case RIGHT:
+                        player->temp->x += accel;
+                        break;
+                case LEFT:
+                        player->temp->x -= accel;
+                        break;
+                case DOWN:
+                        player->temp->y += accel;
+                        break;
+                case NONE:
+                        break;
         }
                 PlayerAnimate();
 }
@@ -127,8 +90,15 @@ void PlayerAnimate()
         }
 }
 
+void PlayerViewUpdate()
+{
+        player->temp->x += view->offset.x;
+        player->temp->y += view->offset.y;
+}
+
 void PlayerUpdate()
 {
+        PlayerViewUpdate();
         MoveApply();
         PlayerMouseRotate();
 }
