@@ -1,12 +1,13 @@
 #include "defs.h"
 
-#include "init.h"
 #include "event.h"
-#include "timer.h"
+#include "init.h"
+#include "level.h"
+#include "menu.h"
 #include "object.h"
 #include "player.h"
-#include "level.h"
+#include "quit.h"
 #include "render.h"
-#include "menu.h"
+#include "timer.h"
 
 extern long buffer;

@@ -3,6 +3,7 @@
 
 #include "event.h"
 #include "render.h"
+#include "timer.h"
 
 extern bool done;
 

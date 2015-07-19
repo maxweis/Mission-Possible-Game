@@ -58,7 +58,7 @@ Direction Collision(SDL_Rect *a, SDL_Rect *b)
 
 Direction BorderCollision(SDL_Rect *a, SDL_Rect *b, int border)
 {
-        Direction dir;
+        Direction dir = NONE;
         if (a->y - border <= b->y && a->y >= b->y)
                 dir = NORTH;
 

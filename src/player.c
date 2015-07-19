@@ -4,7 +4,7 @@ Player *PlayerCreate()
 {
         Player *temp = malloc(sizeof(Player));
 
-        temp->object = ObjectCreate(true, SWIDTH / 2, SHEIGHT / 2, 19, 14, 2, 0, 0, 3, 3);
+        temp->object = ObjectCreate(true, 10, 10, 19, 14, 2, 0, 0, 3, 3);
 
         temp->run = false;
 
@@ -27,7 +27,7 @@ void PlayerMouseRotate()
 
 void PlayerAnimate()
 {
-        if (buffer % 15 == 0){
+        if (!(buffer % 15)){
                 if (player->object->sprite->frame < 2){
                         player->object->sprite->frame++;
                 }
@@ -39,7 +39,17 @@ void PlayerAnimate()
 
 void PlayerUpdate()
 {
+        if (player->run){
+                player->object->vel.x = 5;
+                player->object->vel.y = 5;
+        }
+        else{
+                player->object->vel.x = 3;
+                player->object->vel.y = 3;
+        }
         ObjectMove(player->object);
+        if (player->object->move)
+                PlayerAnimate();
         ObjectMoveApply(player->object);
         PlayerMouseRotate();
         ObjectReset(player->object);

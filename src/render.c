@@ -8,7 +8,7 @@ void InitCursorRender()
 
 void CursorRender()
 {
-        if (cursor == NULL)
+        if (!cursor)
                 InitCursorRender();
         SDL_Rect mouse = {mouse_pos.x - 15, mouse_pos.y - 15, 31, 31};
         SDL_RenderCopy(render, cursor, NULL, &mouse); 
@@ -49,32 +49,33 @@ void ObjectRender()
         }
 }
 
-TTF_Font *mono_font = NULL;
-int font_size = 0;
-char font_name[256];
-void InitTextRender(char *font)
+TTF_Font *font = NULL;
+TTF_Font *InitTextRender(char *font_name, int font_size)
 {
-        mono_font = TTF_OpenFont(font, font_size);
-        if (mono_font == NULL)
+        font = TTF_OpenFont(font_name, font_size);
+        if (!font)
                 fprintf(stderr, "Missing font: %s\n", TTF_GetError());
 }
 
-void TextRender(char *text, SDL_Rect box, char *font, SDL_Color color, int size, bool center)
+void TextRender(char *text, SDL_Rect box, char *font_name, SDL_Color color, int size, bool center_horizontal)
 {
-        if (mono_font == NULL || font_size != size ||
-                        !strcmp(font_name, font)){
-                TTF_CloseFont(mono_font);
-                strcpy(font_name, font);
-                font_size = size;
-                InitTextRender(font);
+        static int loaded_font_size = 0;
+        static char *loaded_font_name = NULL;
+        if (!font || loaded_font_size != size ||
+                        !strcmp(font_name, loaded_font_name)){
+                if (font)
+                        TTF_CloseFont(font);
+                loaded_font_name = strdup(font_name);
+                loaded_font_size = size;
+                InitTextRender(font_name, size);
         }
 
-        SDL_Surface *text_surface = TTF_RenderText_Solid(mono_font, text, color);
+        SDL_Surface *text_surface = TTF_RenderText_Solid(font, text, color);
 
         box.w = text_surface->w;
         box.h = text_surface->h;
 
-        if (center)
+        if (center_horizontal)
                 box.x -= box.w / 2;
 
         SDL_Texture *present = SDL_CreateTextureFromSurface(render, text_surface);

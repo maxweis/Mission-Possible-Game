@@ -35,4 +35,5 @@ void SDLInit(char *caption)
         EventInit();
         PlayerInit();
         ViewInit();
+        srand(time(NULL));
 }

@@ -7,6 +7,7 @@ void OptionsMenu()
 void StartMenu()
 {
         while (!menu_enter && !done){
+                FramesLimit();
                 MenuEventsCheck();
                 if (menu_selection > 0)
                         menu_selection %= 3;

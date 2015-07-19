@@ -3,7 +3,7 @@
 int CountList(char **list)
 {
         int i;
-        for (i = 0; list[i] != NULL; i++)
+        for (i = 0; list[i]; i++)
                 ;
         return i;
 }
@@ -33,7 +33,7 @@ Object *ObjectCreate(bool solid, int x, int y, int width, int height, int scale,
 
         temp->move = NONE;
 
-        temp->temp_rect = malloc(sizeof(SDL_Rect));
+        temp->temp_rect = calloc(0, sizeof(SDL_Rect));
 
         *temp->temp_rect = *temp->sprite->rect;
 
@@ -54,41 +54,48 @@ void ObjectReset(Object *object)
 
 void ObjectMove(Object *object)
 {
-        Vector vel = object->vel;
-        static double accel = 1;
+        static bool movement = true;
 
-        /*if (accel < 1)*/
-                /*accel += .1;*/
+        static double accel = .5;
 
+        if (accel < 1.5)
+                accel += .06;
+
+        if (!movement)
+                accel = .5;
+
+        movement = true;
         switch(object->move){
                 case NORTH:
-                        object->temp_rect->y -= (vel.y * accel);
+                        object->temp_rect->y -= (object->vel.y * accel);
                         break;
                 case NORTHEAST:
-                        object->temp_rect->x += (vel.x * accel / 2);
-                        object->temp_rect->y -= (vel.y * accel / 2);
+                        object->temp_rect->x += (object->vel.x * accel * .7);
+                        object->temp_rect->y -= (object->vel.y * accel * .7);
                         break;
                 case EAST:
-                        object->temp_rect->x += (vel.x * accel);
+                        object->temp_rect->x += (object->vel.x * accel);
                         break;
                 case SOUTHEAST:
-                        object->temp_rect->x += (vel.x * accel / 2);
-                        object->temp_rect->y += (vel.y * accel / 2);
+                        object->temp_rect->x += (object->vel.x * accel * .7);
+                        object->temp_rect->y += (object->vel.y * accel * .7);
                         break;
                 case SOUTH:
-                        object->temp_rect->y += (vel.y * accel);
+                        object->temp_rect->y += (object->vel.y * accel);
                         break;
                 case SOUTHWEST:
-                        object->temp_rect->x -= (vel.x * accel / 2);
-                        object->temp_rect->y += (vel.y * accel / 2);
+                        object->temp_rect->x -= (object->vel.x * accel * .7);
+                        object->temp_rect->y += (object->vel.y * accel * .7);
                         break;
                 case WEST:
-                        object->temp_rect->x -= (vel.x * accel);
+                        object->temp_rect->x -= (object->vel.x * accel);
                         break;
                 case NORTHWEST:
-                        object->temp_rect->x -= (vel.x * accel / 2);
-                        object->temp_rect->y -= (vel.y * accel / 2);
+                        object->temp_rect->x -= (object->vel.x * accel * .7);
+                        object->temp_rect->y -= (object->vel.y * accel * .7);
                         break;
+                case NONE:
+                        movement = false;
         }
 }
 

@@ -18,5 +18,7 @@ int main(int argc, char *argv[])
                 GameScreenRender();
         }
 
+        GameQuit();
+
         return 0;
 }

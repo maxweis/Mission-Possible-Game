@@ -4,5 +4,6 @@
 
 #include "player.h"
 #include "event.h"
+#include <time.h>
 
 void SDLInit(char *caption);

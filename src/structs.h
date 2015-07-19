@@ -3,8 +3,8 @@
 #include "enums.h"
 
 typedef struct Vector{
-        int x;
-        int y;
+        double x;
+        double y;
 } Vector;
 
 typedef struct Sprite{
@@ -14,8 +14,6 @@ typedef struct Sprite{
         int scale;
         SDL_Texture *image;
         SDL_Rect *rect;
-
-        void (*destroy)(void *self);
 } Sprite;
 
 typedef struct Object{

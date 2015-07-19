@@ -2,10 +2,9 @@
 
 bool MouseMove()
 {
-        if (event.motion.x > 0 || event.motion.y > 1)
-                return true;
-        else
-                return true;
+        int x, y;
+        SDL_GetRelativeMouseState(&x, &y);
+        return x || y;
 }
 
 void EventInit()
@@ -72,15 +71,17 @@ void MenuEventsCheck()
                         (mouse_click && event.button.button == SDL_BUTTON_LEFT))
                 menu_enter = true;
 
-        SDL_GetMouseState(&mouse_pos.x, &mouse_pos.y);
+        int mouse_x, mouse_y;
+        SDL_GetMouseState(&mouse_x, &mouse_y);
+        mouse_pos.x = mouse_x;
+        mouse_pos.y = mouse_y;
 }
 
 void GameEventsCheck()
 {
         UniversalEventsCheck();
 
-        if (keystate[SDL_SCANCODE_LSHIFT])
-                player->run = true;
+        player->run = keystate[SDL_SCANCODE_LSHIFT] && key_hold;
 
         if (keystate[SDL_SCANCODE_W])
                 player->object->move = DirUpdate(NORTH);
@@ -94,5 +95,8 @@ void GameEventsCheck()
         if (keystate[SDL_SCANCODE_A])
                 player->object->move = DirUpdate(WEST);
 
-        SDL_GetMouseState(&mouse_pos.x, &mouse_pos.y);
+        int mouse_x, mouse_y;
+        SDL_GetMouseState(&mouse_x, &mouse_y);
+        mouse_pos.x = mouse_x;
+        mouse_pos.y = mouse_y;
 }
