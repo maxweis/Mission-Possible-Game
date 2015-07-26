@@ -33,7 +33,10 @@ void PlayerMouseRotate()
 
 void PlayerAnimate()
 {
-        if (!(buffer % 15) && !player->object->collision){
+        if (!player->object->move)
+                player->object->sprite->frame = 0;
+
+        else if (!(buffer % 15) && !player->object->collision){
                 if (player->object->sprite->frame < 2){
                         player->object->sprite->frame++;
                 }
@@ -55,8 +58,7 @@ void PlayerUpdate()
         }
         ObjectMove(player->object);
         ObjectMoveApply(player->object);
-        if (player->object->move)
-                PlayerAnimate();
+        PlayerAnimate();
         PlayerMouseRotate();
         ObjectReset(player->object);
 }
