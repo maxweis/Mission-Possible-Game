@@ -58,11 +58,10 @@ void ObjectMove(Object *object)
 
         static double accel = .5;
 
+        static Direction old;
+
         if (accel < 1.5)
                 accel += .06;
-
-        if (!movement)
-                accel = .5;
 
         movement = true;
         switch(object->move){
@@ -97,15 +96,27 @@ void ObjectMove(Object *object)
                 case NONE:
                         movement = false;
         }
+        if (!movement || (object->move == -old && object->move && old))
+                accel = .5;
+
+        old = object->move;
+}
+
+Direction ObjectCollisions(Object *object)
+{
+        Direction collision;
+        if (!(collision = ScreenCollision(object->temp_rect, 5))){
+                if (!(collision = ObjectsCollision(object->temp_rect)))
+                        collision = false;
+        }
+        return collision;
 }
 
 void ObjectMoveApply(Object *object)
 {
-        if (!ScreenCollision(object->temp_rect, 5)){
-                if (!ObjectsCollision(object->temp_rect)){
-                        object->sprite->rect->x = object->temp_rect->x;
-                        object->sprite->rect->y = object->temp_rect->y;
-                }
+        if (!(object->collision = ObjectCollisions(object))){
+                object->sprite->rect->x = object->temp_rect->x;
+                object->sprite->rect->y = object->temp_rect->y;
         }
         object->temp_rect->x = object->sprite->rect->x;
         object->temp_rect->y = object->sprite->rect->y;

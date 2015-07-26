@@ -95,6 +95,18 @@ void GameEventsCheck()
         if (keystate[SDL_SCANCODE_A])
                 player->object->move = DirUpdate(WEST);
 
+        if (keystate[SDL_SCANCODE_UP] && key_press)
+                player->health++;
+
+        if (keystate[SDL_SCANCODE_RIGHT])
+                view->offset.x++;
+
+        if (keystate[SDL_SCANCODE_DOWN] && key_press)
+                player->health--;
+
+        if (keystate[SDL_SCANCODE_LEFT])
+                view->offset.x--;
+
         int mouse_x, mouse_y;
         SDL_GetMouseState(&mouse_x, &mouse_y);
         mouse_pos.x = mouse_x;

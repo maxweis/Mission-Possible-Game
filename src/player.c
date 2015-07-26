@@ -8,12 +8,18 @@ Player *PlayerCreate()
 
         temp->run = false;
 
+        temp->health = 1;
+
+        temp->attack = 5;
+
+        temp->defense = 0;
+
         return temp;
 }
 
 void PlayerMouseRotate()
 {
-        if (MouseMove()){
+        if (MouseMove() && !player->object->collision){
                 int x_delta = player->object->sprite->rect->x + player->object->sprite->rect->w / 2 - mouse_pos.x;
                 int y_delta = player->object->sprite->rect->y + player->object->sprite->rect->h / 2 - mouse_pos.y;
                 int angle = (int) ((atan2(y_delta, x_delta) * 180) / 3.1416);
@@ -27,7 +33,7 @@ void PlayerMouseRotate()
 
 void PlayerAnimate()
 {
-        if (!(buffer % 15)){
+        if (!(buffer % 15) && !player->object->collision){
                 if (player->object->sprite->frame < 2){
                         player->object->sprite->frame++;
                 }
@@ -48,9 +54,9 @@ void PlayerUpdate()
                 player->object->vel.y = 3;
         }
         ObjectMove(player->object);
+        ObjectMoveApply(player->object);
         if (player->object->move)
                 PlayerAnimate();
-        ObjectMoveApply(player->object);
         PlayerMouseRotate();
         ObjectReset(player->object);
 }

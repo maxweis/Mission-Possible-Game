@@ -13,6 +13,8 @@ int main(int argc, char *argv[])
 
                 GameEventsCheck();
 
+                ViewUpdate();
+
                 PlayerUpdate();
 
                 GameScreenRender();

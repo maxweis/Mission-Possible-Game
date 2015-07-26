@@ -127,6 +127,30 @@ void StartMenuRender()
         SDL_RenderPresent(render);
 }
 
+void BarRender(SDL_Rect *rect, int size, int amount, SDL_Color fg_color, SDL_Color bg_color)
+{
+        SDL_SetRenderDrawColor(render, bg_color.r, bg_color.g, bg_color.b, bg_color.a);
+        SDL_RenderFillRect(render, rect);
+
+        SDL_SetRenderDrawColor(render, fg_color.r, fg_color.g, fg_color.b, fg_color.a);
+        int width = 3;
+
+        int fg_w = rect->w - width;
+        fg_w *= (int) ((double) size / amount);
+        int fg_x = rect->x + (rect->w - fg_w);
+        SDL_Rect fg = {fg_x, rect->y, fg_w, rect->h};
+
+        SDL_RenderFillRect(render, &fg);
+}
+
+void HUDRender()
+{
+        SDL_Rect rect = {5, 740, 100, 25};
+        SDL_Color bg = {0, 0, 0, 0};
+        SDL_Color fg = {255, 0, 0, 0};
+        BarRender(&rect, player->health, 15, fg, bg);
+}
+
 void GameScreenRender()
 {
         SDL_RenderClear(render);
@@ -135,6 +159,7 @@ void GameScreenRender()
         PlayerRender();
         ObjectRender();
         CursorRender();
+        HUDRender();
 
         SDL_RenderPresent(render);
 }

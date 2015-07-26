@@ -25,6 +25,8 @@ typedef struct Object{
 
         Direction move;
 
+        Direction collision;
+
         SDL_Rect *temp_rect;
 
         Vector dimensions;
@@ -34,6 +36,10 @@ typedef struct Object{
 
 typedef struct Player{
         Object *object;
+
+        int health;
+        int attack;
+        int defense;
 
         bool run;
 } Player;

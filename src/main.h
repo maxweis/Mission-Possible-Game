@@ -9,5 +9,4 @@
 #include "quit.h"
 #include "render.h"
 #include "timer.h"
-
-extern long buffer;
+#include "view.h"
