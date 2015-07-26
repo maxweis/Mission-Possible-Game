@@ -127,25 +127,29 @@ void StartMenuRender()
         SDL_RenderPresent(render);
 }
 
-void BarRender(SDL_Rect *rect, int size, int amount, SDL_Color fg_color, SDL_Color bg_color)
+void BarRender(SDL_Rect *rect, int amount, int full, SDL_Color fg_color, SDL_Color bg_color)
 {
         SDL_SetRenderDrawColor(render, bg_color.r, bg_color.g, bg_color.b, bg_color.a);
         SDL_RenderFillRect(render, rect);
 
         SDL_SetRenderDrawColor(render, fg_color.r, fg_color.g, fg_color.b, fg_color.a);
-        int width = 3;
+        int width = 4;
 
-        int fg_w = rect->w - width;
-        fg_w *= (int) ((double) size / amount);
-        int fg_x = rect->x + (rect->w - fg_w);
-        SDL_Rect fg = {fg_x, rect->y, fg_w, rect->h};
+        double percentage = (double) amount / full;
+
+        if (percentage > 0){
+                if (percentage > 1)
+                        percentage = 1;
+        int fg_w = (int) (rect->w * percentage);
+        SDL_Rect fg = {rect->x + width, rect->y + width, fg_w - width * 2, rect->h - width * 2};
 
         SDL_RenderFillRect(render, &fg);
+        }
 }
 
 void HUDRender()
 {
-        SDL_Rect rect = {5, 740, 100, 25};
+        SDL_Rect rect = {5, 730, 300, 30};
         SDL_Color bg = {0, 0, 0, 0};
         SDL_Color fg = {255, 0, 0, 0};
         BarRender(&rect, player->health, 15, fg, bg);
