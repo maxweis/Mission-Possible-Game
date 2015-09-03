@@ -96,13 +96,18 @@ Direction ViewCollision(SDL_Rect *a, int view_length)
 
 Direction ScreenCollision(SDL_Rect *a, int border)
 {
-        SDL_Rect screen = {0, 0, 1366, 768};
+        SDL_Rect screen = {0, 0, SWIDTH, SHEIGHT};
 
         return BorderCollision(a, &screen, border);
 }
 
-void BoundUpdate(Sprite *sprite) //fix w and h after rotation
+void BoundUpdate(Object *object) 
 {
+        /*double xsin = sin(object->sprite->temp_angle);*/
+        /*double xcos = cos(object->sprite->temp_angle);*/
+
+        /*object->temp_rect->w = object->sprite->rect->h * xsin + object->sprite->rect->w * xcos;*/
+        /*object->temp_rect->h = object->sprite->rect->h * xcos + object->sprite->rect->w * xsin;*/
 }
 
 bool ObjectsCollision(SDL_Rect *rect)

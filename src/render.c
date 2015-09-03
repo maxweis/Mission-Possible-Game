@@ -149,7 +149,7 @@ void BarRender(SDL_Rect *rect, int amount, int full, SDL_Color fg_color, SDL_Col
 
 void HUDRender()
 {
-        SDL_Rect rect = {5, 730, 300, 30};
+        SDL_Rect rect = {5, SHEIGHT - 35, 300, 30};
         SDL_Color bg = {0, 0, 0, 0};
         SDL_Color fg = {255, 0, 0, 0};
         BarRender(&rect, player->health, 15, fg, bg);

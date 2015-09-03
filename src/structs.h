@@ -21,7 +21,9 @@ typedef struct Object{
 
         bool solid;
 
-        Vector vel;
+        double vel;
+
+        double accel;
 
         Direction move;
 
@@ -43,6 +45,16 @@ typedef struct Player{
 
         bool run;
 } Player;
+
+typedef struct Enemy{
+        Object *object;
+
+        int health;
+        int attack;
+        int defense;
+
+        void (*update)(Object *self);
+} Enemy;
 
 typedef struct Map{
         SDL_Rect *rect;
