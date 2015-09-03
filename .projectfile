@@ -1,3 +1,3 @@
 #!/bin/bash
 cd src
-vim -c "OpenSession game"
+vim -c "source ../game.vim"
