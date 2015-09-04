@@ -102,7 +102,7 @@ void ObjectMove(Object *object)
                         movement = false;
         }
         if (!movement || (object->move == -old && object->move && old))
-                object->accel = .5;
+                object->accel = .8;
 
         old = object->move;
 }

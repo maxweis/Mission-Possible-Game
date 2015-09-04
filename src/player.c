@@ -55,7 +55,7 @@ void PlayerUpdate()
         player->object->sprite->temp_angle = player->object->sprite->angle;
         ObjectMove(player->object);
         PlayerMouseRotate();
-        ObjectLockAngle(player->object, 45);
+        ObjectLockAngle(player->object, 30);
         BoundUpdate(player->object);
         ObjectMoveApply(player->object);
         PlayerAnimate();

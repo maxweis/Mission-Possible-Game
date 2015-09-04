@@ -98,7 +98,7 @@ Direction ScreenCollision(SDL_Rect *a, int border)
 {
         SDL_Rect screen = {0, 0, SWIDTH, SHEIGHT};
 
-        return BorderCollision(a, &screen, border);
+        return BorderCollision(&screen, a, border);
 }
 
 void BoundUpdate(Object *object) 
