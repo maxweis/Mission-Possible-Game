@@ -8,8 +8,8 @@
 #include "structs.h"
 #include "enums.h"
 
-#define SWIDTH 1920
-#define SHEIGHT 1080
+#define SWIDTH 1366
+#define SHEIGHT 768
 #define IDK 0
 #define OBJECT_LIMIT 1000
 
