@@ -1,4 +1,10 @@
 #include "player.h"
+#include "render.h"
+
+void PlayerInit()
+{
+        player = PlayerCreate();
+}
 
 Player *PlayerCreate()
 {
@@ -8,11 +14,15 @@ Player *PlayerCreate()
 
         temp->run = false;
 
-        temp->health = 1;
+        temp->health = 10;
+
+        temp->health_max = 10;
 
         temp->attack = 5;
 
         temp->defense = 0;
+
+        temp->alive = true;
 
         return temp;
 }
@@ -46,6 +56,18 @@ void PlayerAnimate()
         }
 }
 
+void PlayerHealthAdd(int amount)
+{
+        player->health += amount;
+        if (player->health <= 0){
+                player->health = 0;
+                player->alive = false;
+        }
+
+        if (player->health > player->health_max)
+                player->health = player->health_max;
+}
+
 void PlayerUpdate()
 {
         if (player->run)
@@ -55,6 +77,8 @@ void PlayerUpdate()
         player->object->sprite->temp_angle = player->object->sprite->angle;
         ObjectMove(player->object);
         PlayerMouseRotate();
+        if (player->object->collision)
+                PlayerHealthAdd(-1);
         ObjectLockAngle(player->object, 30);
         BoundUpdate(player->object);
         ObjectMoveApply(player->object);

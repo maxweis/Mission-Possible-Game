@@ -1,3 +1,3 @@
 #!/bin/bash
 cd src
-vim -c "source ../game.vim"
+vim -c "source ~/.vim/sessions/game.vim"

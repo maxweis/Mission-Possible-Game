@@ -25,17 +25,6 @@ void LevelObjectAdd()
                                         (int) object_values[n][5], 0, 0));
 }
 
-void MapInit(Vector tiles)
-{
-        map = malloc(sizeof(Map));
-        map->rect = calloc(0, sizeof(SDL_Rect));
-
-        map->rect->w = SWIDTH * tiles.x;
-        map->rect->h = SHEIGHT * tiles.y;
-
-        map->tiles = tiles;
-}
-
 void LevelLoad(char *level_name)
 {
         for (int i = 0; i < OBJECT_LIMIT; i++)
@@ -58,5 +47,4 @@ void LevelLoad(char *level_name)
         }
         LevelObjectAdd();
         Vector tiles = {1, 1};
-        MapInit(tiles);
 }

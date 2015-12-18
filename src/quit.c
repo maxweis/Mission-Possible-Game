@@ -2,7 +2,6 @@
 
 void GameQuit()
 {
-        ViewFree();
         MapFree();
         TTF_Quit();
         IMG_Quit();
@@ -12,13 +11,6 @@ void GameQuit()
         SDL_QuitSubSystem(SDL_INIT_EVERYTHING);
         SDL_Quit();
 }
-
-void ViewFree()
-{
-        free(view->rect);
-        free(view);
-}
-
 
 void PlayerFree()
 {

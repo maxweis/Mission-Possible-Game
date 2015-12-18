@@ -9,4 +9,3 @@
 #include "quit.h"
 #include "render.h"
 #include "timer.h"
-#include "view.h"

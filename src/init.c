@@ -1,18 +1,5 @@
 #include "init.h"
 
-void ViewInit()
-{
-        view = malloc(sizeof(View));
-        view->rect = calloc(0, sizeof(SDL_Rect));
-        view->rect->w = SWIDTH;
-        view->rect->h = SHEIGHT;
-}
-
-void PlayerInit()
-{
-        player = PlayerCreate();
-}
-
 void SDLInit(char *caption)
 {
         if (SDL_Init(SDL_INIT_EVERYTHING))
@@ -34,6 +21,5 @@ void SDLInit(char *caption)
 
         EventInit();
         PlayerInit();
-        ViewInit();
         srand(time(NULL));
 }

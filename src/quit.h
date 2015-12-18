@@ -6,7 +6,6 @@
 #include "event.h"
 
 void GameQuit();
-void ViewFree();
 void PlayerFree();
 void SpriteFree(Sprite *sprite);
 void ObjectFree(Object *object);

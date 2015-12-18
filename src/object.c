@@ -123,6 +123,7 @@ void ObjectMoveApply(Object *object)
                 object->sprite->rect->x = object->temp_rect->x;
                 object->sprite->rect->y = object->temp_rect->y;
                 object->sprite->angle = object->sprite->temp_angle;
+                object->collision = NONE;
         }
         object->temp_rect->x = object->sprite->rect->x;
         object->temp_rect->y = object->sprite->rect->y;

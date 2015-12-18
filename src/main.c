@@ -13,14 +13,14 @@ int main(int argc, char *argv[])
 
                 GameEventsCheck();
 
-                ViewUpdate();
+                /*EnemyUpdate();*/
 
                 PlayerUpdate();
 
                 GameScreenRender();
         }
 
-        GameQuit();
+        /*GameQuit();*/
 
         return 0;
 }

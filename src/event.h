@@ -3,6 +3,7 @@
 
 #include "dir.h"
 #include "maths.h"
+#include "player.h"
 
 extern bool done;
 extern Player *player;

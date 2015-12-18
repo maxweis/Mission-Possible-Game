@@ -152,7 +152,7 @@ void HUDRender()
         SDL_Rect rect = {5, SHEIGHT - 35, 300, 30};
         SDL_Color bg = {0, 0, 0, 0};
         SDL_Color fg = {255, 0, 0, 0};
-        BarRender(&rect, player->health, 15, fg, bg);
+        BarRender(&rect, player->health, player->health_max, fg, bg);
 }
 
 void GameScreenRender()

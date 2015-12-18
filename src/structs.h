@@ -40,9 +40,11 @@ typedef struct Player{
         Object *object;
 
         int health;
+        int health_max;
         int attack;
         int defense;
 
+        bool alive;
         bool run;
 } Player;
 
@@ -59,10 +61,5 @@ typedef struct Enemy{
 typedef struct Map{
         SDL_Rect *rect;
         Vector tiles;
+        SDL_Rect *view;
 } Map;
-
-typedef struct View{
-        SDL_Rect *rect;
-        Vector offset;
-} View;
-

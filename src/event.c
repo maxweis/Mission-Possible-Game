@@ -15,8 +15,7 @@ void EventInit()
 
 void ButtonPressHandle()
 {
-        SDL_EventState(SDL_MOUSEMOTION, SDL_IGNORE);
-        SDL_PollEvent(&event);
+        /*SDL_EventState(SDL_MOUSEMOTION, SDL_IGNORE);*/
         keystate = SDL_GetKeyboardState(NULL);
 
         key_press = false;
@@ -46,8 +45,6 @@ void ButtonPressHandle()
 
 void UniversalEventsCheck()
 {
-        ButtonPressHandle();
-
         if (event.type == SDL_QUIT)
                 done = true;
 
@@ -57,7 +54,10 @@ void UniversalEventsCheck()
 
 void MenuEventsCheck()
 {
-        UniversalEventsCheck();
+        ButtonPressHandle();
+        while (SDL_PollEvent(&event)){
+                UniversalEventsCheck();
+        }
 
         if ((keystate[SDL_SCANCODE_W] || keystate[SDL_SCANCODE_UP]) &&
                         key_press)
@@ -79,7 +79,10 @@ void MenuEventsCheck()
 
 void GameEventsCheck()
 {
-        UniversalEventsCheck();
+        ButtonPressHandle();
+        while (SDL_PollEvent(&event)){
+                UniversalEventsCheck();
+        }
 
         player->run = keystate[SDL_SCANCODE_LSHIFT] && key_hold;
 
@@ -96,16 +99,16 @@ void GameEventsCheck()
                 player->object->move = DirUpdate(WEST);
 
         if (keystate[SDL_SCANCODE_UP] && key_press)
-                player->health++;
+                PlayerHealthAdd(1);
 
-        if (keystate[SDL_SCANCODE_RIGHT])
-                view->offset.x++;
+        /*if (keystate[SDL_SCANCODE_RIGHT])*/
+                /*view->offset.x++;*/
 
         if (keystate[SDL_SCANCODE_DOWN] && key_press)
-                player->health--;
+                PlayerHealthAdd(-1);
 
-        if (keystate[SDL_SCANCODE_LEFT])
-                view->offset.x--;
+        /*if (keystate[SDL_SCANCODE_LEFT])*/
+                /*view->offset.x--;*/
 
         int mouse_x, mouse_y;
         SDL_GetMouseState(&mouse_x, &mouse_y);
